@@ -7,8 +7,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
 
+
 @Entity
 @Data
+
 public class Test {
 
     @Id
@@ -22,10 +24,15 @@ public class Test {
     private Long time;
 
 
-//    private TestDTO getDto(){
-//        TestDTO testDTO = new TestDTO();
-//        testDTO.setId(this.id);
-//
-//    }
+    public TestDTO getDto() {
+
+        TestDTO testDTO=new TestDTO();
+        testDTO.setId(id);
+        testDTO.setTitle(title);
+        testDTO.setDescription(description);
+        testDTO.setTime(time);
+
+        return null;
+    }
 
 }
