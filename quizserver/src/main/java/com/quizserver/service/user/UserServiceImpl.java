@@ -54,4 +54,16 @@ public class UserServiceImpl implements UserService {
             }
             return null;
         }
+
+
+    public  User login(User tuser) {
+
+        Optional<User> optionalUser = userRepository.findByEmail(tuser.getEmail());
+        if (optionalUser.isPresent() && tuser.getPassword().equals(optionalUser.get().getPassword())) {
+
+            return optionalUser.get();
+
+        }
+        return null;
+    }
 }

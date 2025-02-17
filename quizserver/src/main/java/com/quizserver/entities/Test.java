@@ -27,12 +27,14 @@ public class Test {
     public TestDTO getDto() {
 
         TestDTO testDTO=new TestDTO();
+
+
         testDTO.setId(id);
         testDTO.setTitle(title);
         testDTO.setDescription(description);
         testDTO.setTime(time);
 
-        return null;
+        return testDTO;
     }
 
 }
