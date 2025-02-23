@@ -7,5 +7,5 @@ import org.springframework.stereotype.Service;
 @Service
 public interface TestService {
 
-    TestDTO CreatetestDTO(TestDTO dto);
+    TestDTO createtest(TestDTO dto);
 }

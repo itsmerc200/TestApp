@@ -13,7 +13,7 @@ public class TestServiceImpl implements TestService {
     @Autowired
     private TestRepository testRepository;
 
-        public TestDTO CreatetestDTO(TestDTO dto){
+        public TestDTO createtest(TestDTO dto){
 
             Test test = new Test();
 
