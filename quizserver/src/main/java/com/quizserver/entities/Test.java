@@ -9,7 +9,6 @@ import java.util.List;
 
 @Entity
 @Data
-
 public class Test {
 
     @Id

@@ -9,9 +9,12 @@ import com.quizserver.repository.TestRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Data
 @Service
@@ -54,4 +57,20 @@ public class TestServiceImpl implements TestService {
             }
             throw new EntityNotFoundException("Test Not Found");
         }
+
+        public List<TestDTO> getAllTests(){
+
+            return testRepository.findAll().stream()
+                    .map(test -> {
+                        long time = test.getTime() != null ? test.getTime() : 0L;  // Handle null case
+                        test.setTime(test.getQuestions().size() * time);
+                        return test.getDto();
+                    })
+                    .collect(Collectors.toList());
+
+
+
+        }
+
+
 }
