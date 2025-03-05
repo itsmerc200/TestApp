@@ -137,4 +137,9 @@ public class TestServiceImpl implements TestService {
         }
 
 
+
+    public List<TestResultDTO> getAllTestResultOfUser(Long userId){
+        return testResultRepository.findAllByUserId(userId).stream().map(TestResult::getDto).collect(Collectors.toList());
+    }
+
 }
