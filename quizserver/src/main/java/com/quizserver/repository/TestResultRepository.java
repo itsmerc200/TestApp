@@ -12,4 +12,7 @@ public interface TestResultRepository extends JpaRepository<TestResult, Long> {
 
  List<TestResult> findAllByUserId(Long userId);
 
+ List<TestResult> findAllByTestId(Long testId);
+
+
 }

@@ -35,6 +35,8 @@ public class TestServiceImpl implements TestService {
     @Autowired
     private UserRepository userRepository;
 
+
+
         public TestDTO createtest(TestDTO dto){
 
             Test test = new Test();
@@ -142,4 +144,40 @@ public class TestServiceImpl implements TestService {
         return testResultRepository.findAllByUserId(userId).stream().map(TestResult::getDto).collect(Collectors.toList());
     }
 
+
+
+    public void deleteQuestion(Long id) {
+        questionRepository.deleteById(id);
+    }
+
+    @Override
+    public void deleteTest(Long testId) {
+        Optional<Test> testOptional = testRepository.findById(testId);
+
+        if (testOptional.isPresent()) {
+            Test test = testOptional.get();
+
+            // Delete all associated questions if present
+            if (test.getQuestions() != null && !test.getQuestions().isEmpty()) {
+                questionRepository.deleteAll(test.getQuestions());
+            }
+
+            // Delete all test results associated with this test
+            testResultRepository.deleteAll(testResultRepository.findAllByTestId(testId));
+
+            // Finally, delete the test
+            testRepository.delete(test);
+        } else {
+            throw new EntityNotFoundException("Test Not Found with ID: " + testId);
+        }
+    }
+
 }
+
+
+
+
+
+
+
+

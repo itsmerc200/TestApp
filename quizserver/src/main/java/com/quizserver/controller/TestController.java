@@ -102,4 +102,20 @@ public class TestController {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
         }
     }
+
+    @DeleteMapping("/question/{id}")
+    public ResponseEntity<?> deleteQuestion(@PathVariable Long id) {
+        try {
+            testService.deleteQuestion(id);
+            return new ResponseEntity<>("Question deleted successfully", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @DeleteMapping("/{testId}")
+    public ResponseEntity<String> deleteTest(@PathVariable Long testId) {
+        testService.deleteTest(testId);
+        return ResponseEntity.ok("Test deleted successfully!");
+    }
 }

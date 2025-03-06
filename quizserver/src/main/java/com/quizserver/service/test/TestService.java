@@ -23,4 +23,14 @@ public interface TestService {
     List<TestResultDTO> getAllTestResult();
 
     List<TestResultDTO> getAllTestResultOfUser(Long userId);
+
+    void deleteQuestion(Long id);
+
+    public void deleteTest(Long testId);
+
+
+
+
+
+
 }
