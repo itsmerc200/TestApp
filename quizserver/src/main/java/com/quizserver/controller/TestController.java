@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import java.io.InputStream;
 
 
 @RestController
@@ -20,6 +22,17 @@ public class TestController {
 
     private TestService testService;
 
+
+    @PostMapping("/upload-questions/{testId}")
+    public ResponseEntity<?> uploadQuestions(@PathVariable Long testId, @RequestParam("file") MultipartFile file) {
+        try {
+            InputStream inputStream = file.getInputStream();
+            testService.addQuestionsFromExcel(testId, inputStream);
+            return new ResponseEntity<>("Questions uploaded successfully", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
 
     @PostMapping
     public ResponseEntity<?> createTest(@RequestBody TestDTO dto){

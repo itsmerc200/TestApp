@@ -5,6 +5,7 @@ import com.quizserver.dto.*;
 import com.quizserver.entities.Test;
 import org.springframework.stereotype.Service;
 
+import java.io.InputStream;
 import java.util.List;
 
 @Service
@@ -27,6 +28,8 @@ public interface TestService {
     void deleteQuestion(Long id);
 
     public void deleteTest(Long testId);
+
+    void addQuestionsFromExcel(Long testId, InputStream inputStream) throws Exception;
 
 
 
