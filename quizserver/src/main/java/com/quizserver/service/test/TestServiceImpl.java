@@ -129,6 +129,35 @@ public class TestServiceImpl implements TestService {
     }
 
     @Override
+    public TestDTO updateTest(Long testId, TestDTO dto) {
+        Optional<Test> optionalTest = testRepository.findById(testId);
+        if (optionalTest.isPresent()) {
+            Test test = optionalTest.get();
+            test.setTitle(dto.getTitle());
+            test.setDescription(dto.getDescription());
+            test.setTime(dto.getTime());
+            return testRepository.save(test).getDto();
+        }
+        throw new EntityNotFoundException("Test Not Found with ID: " + testId);
+    }
+
+    @Override
+    public QuestionDTO updateQuestion(Long questionId, QuestionDTO dto) {
+        Optional<Question> optionalQuestion = questionRepository.findById(questionId);
+        if (optionalQuestion.isPresent()) {
+            Question question = optionalQuestion.get();
+            question.setQuestionText(dto.getQuestionText());
+            question.setOptionA(dto.getOptionA());
+            question.setOptionB(dto.getOptionB());
+            question.setOptionC(dto.getOptionC());
+            question.setOptionD(dto.getOptionD());
+            question.setCorrectOption(dto.getCorrectOption());
+            return questionRepository.save(question).getDto();
+        }
+        throw new EntityNotFoundException("Question Not Found with ID: " + questionId);
+    }
+
+    @Override
     public void deleteQuestion(Long id) {
         questionRepository.deleteById(id);
     }

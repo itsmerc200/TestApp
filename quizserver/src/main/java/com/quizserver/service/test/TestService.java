@@ -31,7 +31,9 @@ public interface TestService {
 
     void addQuestionsFromExcel(Long testId, InputStream inputStream) throws Exception;
 
+    TestDTO updateTest(Long testId, TestDTO dto);
 
+    QuestionDTO updateQuestion(Long questionId, QuestionDTO dto);
 
 
 
