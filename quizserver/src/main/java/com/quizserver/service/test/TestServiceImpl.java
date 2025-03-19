@@ -41,6 +41,9 @@ public class TestServiceImpl implements TestService {
     @Autowired
     private UserRepository userRepository;
 
+
+
+
     @Override
     public TestDTO createtest(TestDTO dto) {
         Test test = new Test();
@@ -244,4 +247,27 @@ public class TestServiceImpl implements TestService {
                 return "";
         }
     }
+
+    @Override
+    public QuestionDTO getQuestionById(Long questionId) {
+        // Fetch the question from the repository
+        Question question = questionRepository.findById(questionId)
+                .orElseThrow(() -> new RuntimeException("Question not found with id: " + questionId));
+
+        // Map the Question entity to a QuestionDTO
+        return mapQuestionToDTO(question);
+    }
+
+    private QuestionDTO mapQuestionToDTO(Question question) {
+        QuestionDTO dto = new QuestionDTO();
+        dto.setId(question.getId());
+        dto.setQuestionText(question.getQuestionText());
+        dto.setOptionA(question.getOptionA());
+        dto.setOptionB(question.getOptionB());
+        dto.setOptionC(question.getOptionC());
+        dto.setOptionD(question.getOptionD());
+        dto.setCorrectOption(question.getCorrectOption());
+        return dto;
+    }
+
 }

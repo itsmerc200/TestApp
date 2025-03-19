@@ -22,6 +22,15 @@
 
         private TestService testService;
 
+        @GetMapping("/question/{questionId}")
+        public ResponseEntity<?> getQuestionById(@PathVariable Long questionId) {
+            try {
+                return new ResponseEntity<>(testService.getQuestionById(questionId), HttpStatus.OK);
+            } catch (Exception e) {
+                return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            }
+        }
+
 
 
         @PutMapping("/{testId}")

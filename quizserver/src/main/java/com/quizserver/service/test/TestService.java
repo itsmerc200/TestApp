@@ -35,6 +35,8 @@ public interface TestService {
 
     QuestionDTO updateQuestion(Long questionId, QuestionDTO dto);
 
+    QuestionDTO getQuestionById(Long questionId);
+
 
 
 
